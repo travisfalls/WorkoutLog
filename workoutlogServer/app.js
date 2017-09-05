@@ -39,7 +39,7 @@ sequelize.authenticate().then(
 
 //creates a table in postgres and matches the model we defined
 User.sync();
-//User.sync({force:true});
+User.sync({force:true});
 
 app.use(bodyParser.json());
 
