@@ -10,8 +10,6 @@ $(function(){
 				};
 				var postData = {definition: def};
 				
-				console.log(postData);
-				
 				var define = $.ajax({
 					type: "POST",
 					url: WorkoutLog.API_BASE + "definition",
