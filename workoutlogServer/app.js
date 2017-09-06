@@ -6,7 +6,8 @@ var bodyParser = require('body-parser');
 var sequelize = require('./db.js');
 var User = sequelize.import(__dirname + '/models/user');
 
-User.sync( {force: true}) //WARNING: This will DROP the table!
+//User.sync(); //sync( {force: true}) WARNING: This will DROP the table!
+sequelize.sync();
 
 app.use(bodyParser.json());
 
@@ -15,14 +16,8 @@ app.use(require('./middleware/headers'));
 app.use(require('./middleware/validate-session'));
 
 app.use('/api/user', require('./routes/user'));
-
-//login route
 app.use('/api/login', require('./routes/session'));
-
-//prints message on AJAX call to api/test
-app.use('/api/test', function(req, res){
-	res.send("Hello World");
-});
+app.use('/api/definition', require('./routes/definition'));
 
 //tells server to run on localhost: 3000 and prints success message in console
 app.listen(3000, function () {
