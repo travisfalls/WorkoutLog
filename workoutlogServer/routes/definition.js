@@ -1,10 +1,12 @@
 var router = require('express').Router();
-var sequelize = require('../db.js');
-var User = sequelize.import('../models/user.js');
-var Definition = sequelize.import('../models/definition.js');
+var sequelize = require('../db');
+var User = sequelize.import('../models/user');
+var Definition = sequelize.import('../models/definition');
 
 router.post('/', function(req, res){
 	//variables
+	
+	console.log(req.body);
 	var description = req.body.definition.desc;
 	var logType = req.body.definition.type;
 	var owner = req.user.id;
@@ -35,7 +37,10 @@ router.get('/', function(req, res){
 	var userid = req.user.id;
 	
 	Definition
-	.then(
+		.findAll({
+			where: {owner: userid}
+		})
+		.then(
 		//success
 		function findAllSuccess(data){
 			//console.log(data);
