@@ -26,6 +26,8 @@ $(function(){
 			signup.done(function(data){
 				if(data.sessionToken){
 					WorkoutLog.setAuthHeader(data.sessionToken);
+					WorkoutLog.definition.fetchAll();
+					WorkoutLog.log.fetchAll();
 					console.log("You made it!");
 					console.log(data.sessionToken);
 				}
@@ -62,12 +64,14 @@ $(function(){
 			login.done(function(data){
 				if(data.sessionToken) {
 					WorkoutLog.setAuthHeader(data.sessionToken);
+					WorkoutLog.definition.fetchAll();
+					WorkoutLog.log.fetchAll();
 				}
 				$("#login-modal").modal("hide");
 				$(".disabled").removeClass("disabled");
 				$("#loginout").text("Logout");
 			}).fail(function(){
-				$("#li_error").text("There was an issue with sign up").show();
+				$("#li_error").text("There was an issue with login").show();
 			});
 		},
 		//loginout method
